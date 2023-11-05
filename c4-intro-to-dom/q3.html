@@ -12,7 +12,8 @@
     <p>2 + 2 = 22</p>
 
     <script>
-
+      let paraElems = document.querySelectorAll("p");
+      paraElems.forEach(elem => elem.innerText = "2 + 2 = 4");
     </script>
   </body>
 </html>
