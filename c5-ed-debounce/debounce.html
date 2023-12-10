@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" />
+
+  <script>
+    let count = 0;
+    let inputElem = document.querySelector('input');
+
+    function makeNetworkReq() {
+      console.log("Network Request =>", count);
+      count++;
+    }
+
+    // function debounce(cb, delay = 2000) {
+    //   let timerId;
+    //   return function() {
+    //     clearTimeout(timerId);
+    //     timerId = setTimeout(cb, delay);
+    //   }
+    // }
+
+    function throttle(cb, delay) {
+      let flag = true;
+      return function() {
+        if (flag === true) {
+          cb();
+          flag = false;
+        }
+
+        setTimeout(() => {
+          flag = true;
+        }, delay);
+      }
+    }
+
+    // const debounceMNR = debounce(makeNetworkReq, 2000)
+    const throttleMNR = throttle(makeNetworkReq, 2000)
+
+    inputElem.addEventListener("keydown", throttleMNR);
+  </script>
+</body>
+</html>
